@@ -1,0 +1,45 @@
+{% include "base.html" %}
+{% load static %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en">
+<head>
+<script type="text/javascript">
+    function changeStyle(id) {
+        var lis = document.getElementsByTagName("li");
+        for (var i = 0; i < lis.length; i++) {
+            lis[i].className = "";
+        }
+        var obj = document.getElementById(id);
+        obj.className = "active";
+    }
+
+    function run() {
+        document.getElementById("run").click();
+    }
+</script>
+<style type="text/css">
+body{
+    background-color:#d4d4d4;
+}
+</style>
+</head>
+
+<body onload="run()">
+	<div style="padding: 10px;">
+		<ul class="nav nav-pills nav-stacked">
+			<li id="li1" onclick="changeStyle('li1')" class="active">
+                <a target="mainFrame" href="#" id="run">统计汇总</a>
+            </li>
+			<li id="li2" onclick="changeStyle('li2')">
+                <a target="mainFrame" href="#">号段投放</a>
+            </li>
+			<li id="li3" onclick="changeStyle('li3')">
+                <a target="mainFrame" href="#">号码预约</a>
+            </li>
+			<li id="li4" onclick="changeStyle('li4')">
+                <a target="mainFrame" href="#">号码预约管理</a>
+            </li>
+		</ul>
+	</div>
+</body>
+</html>
