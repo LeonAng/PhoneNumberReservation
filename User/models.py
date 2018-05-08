@@ -13,7 +13,6 @@ class User(models.Model):
     pass_word = models.CharField(max_length=128)
     is_admin = models.BooleanField(default=False)  # 是否是管理员，默认不是
     phone_number = models.IntegerField(default=0)  # 手中号码个数
-    phone_number_list = models.CharField(max_length=200)  # 抢到的手机号，分号分割
 
 
 admin.site.register(User)  # 注册该数据模型到 admin

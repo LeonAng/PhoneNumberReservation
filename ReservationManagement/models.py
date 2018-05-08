@@ -25,11 +25,6 @@ class PhoneNumber(models.Model):  # 开放的号码
     date = models.DateField(null=True,blank=True)
 
 
-class Order4Day(models.Model):  # 每日抢号数量
-    date = models.DateField(auto_now_add=True, primary_key=True)
-    number = models.IntegerField(default=0)  # 被预约号个数
-
-
 admin.site.register(MobileCode4Day)
 admin.site.register(PhoneNumber)
-admin.site.register(Order4Day)
+
