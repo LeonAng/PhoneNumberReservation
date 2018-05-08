@@ -1,12 +1,37 @@
+{% include "base.html" %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css">
 </head>
 <body>
-    <div align="center">
-		<h4>———— 号码预约管理 ————</h4>
-	</div>
+<div align="center">
+    <h4>———— 号码预约管理 ————</h4>
+</div>
+<table align='center' width="90%" class="table">
+    <tr>
+        <td>号码</td>
+        <td>是否被预约</td>
+        <td>是否被预留</td>
+        <td>预约人</td>
+        <td>预约日期</td>
+        <td>撤回</td>
+    </tr>
+    {% for c in list %}
+        <tr>
+            <td>{{c.phone_number}}</td>
+            <td>{{c.is_achieved}}</td>
+            <td>{{c.id_reserved}}</td>
+            <td>{{c.user_name}}</td>
+            <td>{{c.date}}</td>
+            <td>
+                <a href="/deleteNumber?phone_number={{c.phone_number}}" class="btn btn-default"><img src="{% static 'images/delete.png' %}" alt="撤回"/></a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
 </body>
 </html>

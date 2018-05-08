@@ -28,14 +28,27 @@ admin.autodiscover()
 urlpatterns = [
     path('admin/', admin.site.urls),
 
+    # 登陆
     path('index/', user_views.index),
     path('index/login', user_views.login),
     path('index/homeTitle', user_views.homeTitle),
     path('index/homeLeft', user_views.homeLeft),
 
+    # 注册 注销
     path('registePage/', user_views.registePage),
     path('registePage/registe', user_views.registe),
     path('logout',user_views.logout),
+
+    # 预约
+    path('Reservation/', reservation_views.reservation),
+    path('reservationNumber/',reservation_views.reservationNumber),
+
+    # 预约管理
+    path('ReservationManagement/', reservation_management_views.reservationManagement),
+    path('deleteNumber', reservation_management_views.deleteNumber),
+
+    path('PhoneNumberPutting/', reservation_management_views.phoneNumberPutting),
+    path('Analysis/', statistical_summary_views.analysis),
 
 
     path('hello/',reservation_views.hello),  # 测试

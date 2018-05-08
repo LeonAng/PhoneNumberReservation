@@ -10,19 +10,19 @@ from User.models import User
 
 class MobileCode4Day(models.Model):  # 每日开放的号段
     date = models.DateField(auto_now_add=True, primary_key=True)
-    mobile_code_start = models.IntegerField(default=0)  # 起始号段
-    mobile_code_end = models.IntegerField(default=0)  # 终止号段
+    mobile_code_start = models.BigIntegerField(default=0)  # 起始号段
+    mobile_code_end = models.BigIntegerField(default=0)  # 终止号段
     reservation_strategy_666 = models.BooleanField(default=False)  # 带666
     reservation_strategy_888 = models.BooleanField(default=False)  # 带888
-    reservation_number = models.CharField(max_length=200)  # 手动输入的预留号码
+    reservation_number = models.CharField(max_length=200, null=True,blank=True)  # 手动输入的预留号码
 
 
 class PhoneNumber(models.Model):  # 开放的号码
-    phone_number = models.IntegerField(default=0, primary_key=True)  # 号码
+    phone_number = models.BigIntegerField(default=0, primary_key=True)  # 号码
     is_achieved = models.BooleanField(default=False)  # 是否被预约
     id_reserved = models.BooleanField(default=False)  # 是否被预留
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  # 多对一 外键
-    date = models.DateField(default='')
+    user_name = models.CharField(max_length=20,null=True,blank=True)  # 预约人
+    date = models.DateField(null=True,blank=True)
 
 
 class Order4Day(models.Model):  # 每日抢号数量
