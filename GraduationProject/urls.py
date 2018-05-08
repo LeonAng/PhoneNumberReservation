@@ -48,6 +48,7 @@ urlpatterns = [
     path('deleteNumber', reservation_management_views.deleteNumber),
 
     path('PhoneNumberPutting/', reservation_management_views.phoneNumberPutting),
+    path('PhoneNumberPutting/setMobileCode', reservation_management_views.setMobileCode),
     path('Analysis/', statistical_summary_views.analysis),
 
 

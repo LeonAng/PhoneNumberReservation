@@ -9,7 +9,7 @@ from User.models import User
 
 
 class MobileCode4Day(models.Model):  # 每日开放的号段
-    date = models.DateField(auto_now_add=True, primary_key=True)
+    date = models.DateField(auto_now_add=True)
     mobile_code_start = models.BigIntegerField(default=0)  # 起始号段
     mobile_code_end = models.BigIntegerField(default=0)  # 终止号段
     reservation_strategy_666 = models.BooleanField(default=False)  # 带666

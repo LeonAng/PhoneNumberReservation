@@ -17,19 +17,21 @@
 	</div>
 
     <div class="box">
-		<form action="addGoods" method="post" accept-charset="utf-8">
+		<form action="setMobileCode" method="post" accept-charset="utf-8">
+            {% csrf_token %}
 			<fieldset>
 				<label>起始号码</label> <input type="text" name="mobile_code_start"/><br>
 				<label>终止号码</label> <input type="text" name="mobile_code_end"/><br>
                 <label>预留策略</label>
-                <input type="radio" name="reservation_strategy_666">预留所有带666的</input>
-                <input type="radio" name="reservation_strategy_888">预留所有带888的</input><br>
+                <input type="radio" name="reservation_strategy_666"  value="1">预留所有带666的</input>
+                <input type="radio" name="reservation_strategy_666"  value="2" checked hidden="hidden">{% comment %}不预留所有带666的{% endcomment %}</input>
+                <input type="radio" name="reservation_strategy_888"  value="1">预留所有带888的</input>
+                <input type="radio" name="reservation_strategy_888"  value="2" checked hidden="hidden">{% comment %}不预留所有带888的{% endcomment %}</input><br>
                 <label>预留号码</label><br>
                 <div class="col-md-8" style="float: left">
 						<textarea type="text" class="form-control" name="reservation_number"
                                   value="" placeholder="手动输入预留号码，可写多个英文逗号:,分割" style="height: 100px;"></textarea>
                 </div><br><br><br><br><br>
-
                 <button type="submit" class="btn">提交</button>
 			</fieldset>
 		</form>
