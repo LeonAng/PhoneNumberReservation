@@ -86,6 +86,10 @@
 	{#	userData.labels.push("${u.name}");#}
 	{#	userData.datasets[0].data.push("${u.projectsNum}");#}
 	{#</c:forEach>#}
+    {% for i in userList %}
+        userData.labels.push("{{ i.name }}");
+        userData.datasets[0].data.push("{{ i.phone_number }}")
+    {% endfor %}
 
 	$(function() {
 		var userCtx = document.getElementById('usersReservation').getContext("2d");

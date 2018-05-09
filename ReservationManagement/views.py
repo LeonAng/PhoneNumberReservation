@@ -27,7 +27,6 @@ def phoneNumberPutting(request):
 
 def deleteNumber(request):
     phone_number = request.GET['phone_number']
-    #print(phone_number)
     phoneNumber = PhoneNumber.objects.get(phone_number = phone_number)
     phoneNumber.is_achieved = False
     phoneNumber.date = None
