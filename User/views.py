@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.template import RequestContext
-
+from django.contrib.auth.hashers import make_password, check_password
 # Create your views here.
 from User.models import User
 
@@ -15,7 +15,7 @@ def login(request):
     user = User(name,pass_word)
     list = User.objects.all()
     for i in list:
-        if i.name ==user.name and i.pass_word == user.pass_word:
+        if i.name ==user.name and check_password(user.pass_word, i.pass_word):
             request.session['username'] = i.name
             request.session['is_admin'] = i.is_admin
             request.session.set_expiry(1800)  # session过期时间：30分钟
@@ -46,7 +46,7 @@ def registePage(request):
 
 def registe(request):
     name = request.POST['username']
-    pass_word = request.POST['password']
+    pass_word = make_password(request.POST['password'])
     foo = request.POST['identity']
     if (foo == 'manager'):
         is_admin = True
