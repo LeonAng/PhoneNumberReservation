@@ -35,9 +35,15 @@
                     {% if c.id_reserved %}
                         <span>不能预约</span>
                     {% else %}
+                        {% if request.session.is_admin == False %}
                         <a href="/reservationNumber?phone_number={{ c.phone_number }}" class="btn btn-default">
                             <img src="{% static 'images/add.png' %}" alt="预约"/>
                         </a>
+                        {% else %}
+                        <a href="#" class="btn btn-default" data-toggle="modal" data-target="#myModal">
+                            <img src="{% static 'images/add.png' %}" alt="预约"/>
+                        </a>
+                        {% endif %}
                     {% endif %}
                 </td>
             </tr>
@@ -45,5 +51,73 @@
     </table>
     <a href="/Reservation?p={{ prev_pager }}"><span style="font-size:30px">上一页</span></a>&#12288;
     <a href="/Reservation?p={{ next_pager }}"><span style="font-size:30px">下一页</span></a>
+
+
+    <!-- 管理员设置预约信息（Modal） -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h4 class="modal-title" id="myModalLabel">设置预约信息</h4>
+				</div>
+
+				<form action="setReservation" method="post" accept-charset="utf-8">
+                    {% csrf_token %}
+					<label class="col-md-4 control-label" style="width:114px">号码：</label>
+					<div class="col-md-8" style="float: left">
+						<input type="text" class="form-control" name="phoneNumber" value=""
+							placeholder="#" readonly="readonly">
+					</div>
+
+					<br><br>
+					<label class="col-md-4 control-label" style="width:114px;float:left;">是否被预留：</label>
+					<div class="col-md-8" style="float: left">
+						<input type="text" class="form-control" name="idReserved" value=""
+							placeholder="#">
+					</div>
+					<br><br>
+
+					<label class="col-md-4 control-label" style="width:114px;float:left;">预约人：</label>
+					<div class="col-md-8" style="float: left">
+						<input type="text" class="form-control" name="userName" value=""
+							placeholder="#" >
+					</div>
+					<br><br>
+
+					<label class="col-md-4 control-label" style="width:114px;float:left;">预约日期：</label>
+					<div class="col-md-8" style="float: left">
+						<input type="text" class="form-control" name="date" value=""
+							placeholder="#">
+					</div>
+					<br><br>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="submit" class="btn btn-primary">提交更改</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		$('#myModal').on('show.bs.modal', function(event) {
+			var btnThis = $(event.relatedTarget); //触发事件的按钮
+			var modal = $(this); //当前模态框
+			var modalId = btnThis.data('id'); //解析出data-id的内容
+			var content = btnThis.closest('tr').find('td').eq(0).text();
+			modal.find('input[name="phoneNumber"]').val(content);
+			var content = btnThis.closest('tr').find('td').eq(2).text();
+			modal.find('input[name="idReserved"]').val(content);
+			var content = btnThis.closest('tr').find('td').eq(3).text();
+			modal.find('input[name="userName"]').val(content);
+			var content = btnThis.closest('tr').find('td').eq(4).text();
+			modal.find('input[name="date"]').val(content);
+		});
+	</script>
+
+
 </body>
 </html>

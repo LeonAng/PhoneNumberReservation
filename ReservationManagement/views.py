@@ -69,3 +69,24 @@ def setMobileCode(request):
 
         phoneNumber.save()
     return render(request, 'home/mainFrame/ReservationManagement.html')
+
+def setReservation(request):
+    phoneNumber = request.POST['phoneNumber']
+    if request.POST['idReserved'] =='False':
+        idReserved = False
+    else:
+        idReserved = True
+    if request.POST['userName'] == 'None':
+        userName = None
+        is_achieved = False
+        date = None
+    else:
+        is_achieved = True
+        userName = request.POST['userName']
+        date = datetime.datetime.now().strftime('%Y-%m-%d')
+    if request.POST['date'] != 'None':
+        date = request.POST['date']
+
+    foo = PhoneNumber(phoneNumber,is_achieved, idReserved, userName, date)
+    foo.save()
+    return render(request, 'home/mainFrame/ReservationManagement.html')

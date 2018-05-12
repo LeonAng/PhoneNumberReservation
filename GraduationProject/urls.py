@@ -50,6 +50,7 @@ urlpatterns = [
     path('PhoneNumberPutting/', reservation_management_views.phoneNumberPutting),
     path('PhoneNumberPutting/setMobileCode', reservation_management_views.setMobileCode),
     path('Analysis/', statistical_summary_views.analysis),
+    path('Reservation/setReservation', reservation_management_views.setReservation),
 
 
     path('hello/',reservation_views.hello),  # 测试
